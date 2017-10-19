@@ -37,33 +37,33 @@ public class IO1_201314817 {
         LinearObjectiveFunction f = new LinearObjectiveFunction(new double[] { 5, 10}, 0);
  
         Collection constraints = new ArrayList();
-        constraints.add(new LinearConstraint(new double[] { 3, 1}, Relationship.GEQ, 8));
-        constraints.add(new LinearConstraint(new double[] { 0, 4}, Relationship.GEQ, 4));
-        constraints.add(new LinearConstraint(new double[] { 2, 0}, Relationship.LEQ, 2));
+        constraints.add(new LinearConstraint(new double[] { 3, 1}, Relationship.GEQ, 8));// GEQ >=
+        constraints.add(new LinearConstraint(new double[] { 0, 4}, Relationship.GEQ, 4));// GEQ >=
+        constraints.add(new LinearConstraint(new double[] { 2, 0}, Relationship.LEQ, 2));// LEQ <=
  
-        constraints.add(new LinearConstraint(new double[] { 1, 0}, Relationship.GEQ, 0));
-        constraints.add(new LinearConstraint(new double[] { 0, 1}, Relationship.GEQ, 0));
+        constraints.add(new LinearConstraint(new double[] { 1, 0}, Relationship.GEQ, 0));// GEQ >=
+        constraints.add(new LinearConstraint(new double[] { 0, 1}, Relationship.GEQ, 0));// GEQ >=
  
         //create and run solver
         RealPointValuePair solution = null;
         try {
-            solution = new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, false);
+            solution = new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, false);// si se quiere maximizar se cambia a MAXIMIZE
         }
         catch (OptimizationException e) {
             e.printStackTrace();
         }
  
-        if (solution != null) {
+        if (solution != null) { 
         //get solution
-            double max = solution.getValue();
+            double max = solution.getValue();// la solucion optima 
         System.out.println("Opt: " + max);
  
         //print decision variables
         for (int i = 0; i < 2; i++) {
-            System.out.print(solution.getPoint()[i] + "\t");
+            System.out.print(solution.getPoint()[i] + "\t");// el valor de las variables 
         }
         
-            System.out.println("Solucion Maximizacion: "+ (solution.getPoint()[0]*5+solution.getPoint()[1]*10));
+            System.out.println("Solucion Minimizacion: "+ (solution.getPoint()[0]*5+solution.getPoint()[1]*10));
     
         }
         System.out.println("");
